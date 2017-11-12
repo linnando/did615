@@ -1,0 +1,65 @@
+<div class="container">
+    <form #gaForm="ngForm" (submit)="run()">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="n">Number of dimensions:</label>
+                <input type="number" id="n" name="n" class="form-control" required [(ngModel)]="n" #nCtrl="ngModel">
+                <div *ngIf="nCtrl.invalid && (nCtrl.dirty || nCtrl.touched)" class="alert alert-danger">
+                    <div *ngIf="nCtrl.errors.required">
+                        Required field
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="a">Parameter A:</label>
+                <input type="number" step="any" id="a" name="a" class="form-control" required [(ngModel)]="a"
+                       #aCtrl="ngModel">
+                <div *ngIf="aCtrl.invalid && (aCtrl.dirty || aCtrl.touched)" class="alert alert-danger">
+                    <div *ngIf="aCtrl.errors.required">
+                        Required field
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="populationSize">Population size:</label>
+                <input type="number" id="populationSize" name="populationSize" class="form-control" required
+                       [(ngModel)]="populationSize" #populationSizeCtrl="ngModel">
+                <div *ngIf="populationSizeCtrl.invalid && (populationSizeCtrl.dirty || populationSizeCtrl.touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="populationSizeCtrl.errors.required">
+                        Required field
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="generationNumber">Number of generations:</label>
+                <input type="number" id="generationNumber" name="generationNumber" class="form-control" required
+                       [(ngModel)]="generationNumber" #generationNumberCtrl="ngModel">
+                <div *ngIf="generationNumberCtrl.invalid && (generationNumberCtrl.dirty || generationNumberCtrl.touched)"
+                     class="alert alert-danger">
+                    <div *ngIf="generationNumberCtrl.errors.required">
+                        Required field
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <button type="submit" class="btn btn-success" [disabled]="gaForm.invalid">Run</button>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="seed">Seed:</label>
+                <input type="text" pattern="\d*" id="seed" name="size" class="form-control" [(ngModel)]="seed" #seedCtrl="ngModel">
+                <div *ngIf="seedCtrl.invalid && (seedCtrl.dirty || seedCtrl.touched)" class="alert alert-danger">
+                    <div *ngIf="seedCtrl.errors.pattern">
+                        Wrong number
+                    </div>
+                </div>
+            </div>
+        </div>
+        <label for="log">Results:</label>
+        <textarea id="log" name="log" [(ngModel)]="log" readonly></textarea>
+    </form>
+</div>
