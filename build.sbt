@@ -26,4 +26,4 @@ lazy val root = project.in(file(".")).
 
 val stage = taskKey[Unit]("Stage task")
 
-stage := (fastOptJS in Compile).value
+stage := (fullOptJS in Compile).value
