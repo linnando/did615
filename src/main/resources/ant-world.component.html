@@ -1,0 +1,48 @@
+<div class="modal fade" tabindex="-1" role="dialog" [id]="modalId">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">World</h4>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="hasState" class="row">
+                    <div class="col-sm-10">{{programText}}</div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-default" (click)="nextState()"
+                                [disabled]="remainingSteps === '0'"><i class="fa fa-step-forward" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="hasState" class="row">
+                    <div class="col-sm-6 col-md-3">Memory {{getMemory}}</div>
+                    <div class="col-sm-6 col-md-3">Sensor {{getSensor}}</div>
+                    <div class="col-sm-6 col-md-3">Remaining steps {{remainingSteps}}</div>
+                    <div class="col-sm-6 col-md-3">Collected {{collectedFeed}}</div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-condensed">
+                        <tr *ngFor="let y of reversedYIndices">
+                            <th>{{y}}</th>
+                            <td *ngFor="let x of xIndices" (dblclick)="toggleFeed(x, y)">
+                                <i *ngIf="feedAvailable(x, y)" class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                <i *ngIf="hasAntDown(x, y)" class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+                                <i *ngIf="hasAntLeft(x, y)" class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                <i *ngIf="hasAntRight(x, y)" class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                <i *ngIf="hasAntUp(x, y)" class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th *ngFor="let x of xIndices">{{x}}</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveFeed()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

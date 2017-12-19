@@ -33,7 +33,9 @@ object Generation {
   private def select(population: Vector[Individual], n: Int, generator: Random): Vector[Individual] = {
     val fitness = population.map(_.fitness)
     val runningTotals = fitness.foldLeft(List(0.0))((d, f) => (d.head + f) :: d)
-    val cdf = runningTotals.map(_ / runningTotals.head).reverse.tail
+    val cdf =
+      if (runningTotals.head > 0) runningTotals.map(_ / runningTotals.head).reverse.tail
+      else Vector.tabulate(population.length)(i => 1.0 * (i + 1) / population.length)
     (0 until n).map(_ => {
       val p = generator.nextDouble()
       population(cdf.indexWhere(p < _))
