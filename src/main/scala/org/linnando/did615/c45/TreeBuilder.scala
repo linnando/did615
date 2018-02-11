@@ -78,7 +78,7 @@ case class TreeBuilder[T](examples: Vector[T], classify: T => Int, classes: Map[
       val splitEntropy = TreeBuilder.entropy(List(n - weights0 - weights1, weights0, weights1))
       if (splitEntropy == 0.0) None
       else {
-        val gain = entropy * (weights0 + weights1) / n - residualEntropy + math.log(sortedStats.length - 1) / math.log(2) / n
+        val gain = entropy * (weights0 + weights1) / n - residualEntropy - math.log(sortedStats.length - 1) / math.log(2) / n
         Some((item => attribute(item).map(value => if (value <= threshold) 0 else 1),
           gain / splitEntropy,
           Map(0 -> s"<= $threshold", 1 -> s"> $threshold")))
