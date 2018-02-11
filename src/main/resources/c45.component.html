@@ -1,0 +1,11 @@
+<div class="container">
+    <form #c45Form="ngForm" (submit)="run()">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <button type="submit" class="btn btn-success" [disabled]="c45Form.invalid">Run</button>
+            </div>
+        </div>
+        <label for="result">Results:</label>
+        <textarea id="result" name="result" [(ngModel)]="result" readonly></textarea>
+    </form>
+</div>

@@ -8,6 +8,7 @@ import angulate2.std._
 import org.linnando.did615.genetic.{GeneticAlgorithmComponent, GeneticAlgorithmService}
 import org.linnando.did615.genprogramming.{AntWorldComponent, GeneticProgrammingComponent, GeneticProgrammingService}
 import org.linnando.did615.backprop.{BackPropagationComponent, BackPropagationService}
+import org.linnando.did615.c45.{C45Component, C45Service}
 
 import scala.scalajs.js
 
@@ -15,18 +16,20 @@ import scala.scalajs.js
   imports = @@[BrowserModule, FormsModule, HttpModule] :+
     RouterModule.forRoot(@@@(
       Route(path = "", redirectTo = "/genetic", pathMatch = "full"),
+      Route(path = "backprop", component = %%[BackPropagationComponent]),
+      Route(path = "c45", component = %%[C45Component]),
       Route(path = "genetic", component = %%[GeneticAlgorithmComponent]),
-      Route(path = "genprogramming", component = %%[GeneticProgrammingComponent]),
-      Route(path = "backprop", component = %%[BackPropagationComponent])
+      Route(path = "genprogramming", component = %%[GeneticProgrammingComponent])
     ), js.Dynamic.literal(useHash = true)),
   declarations = @@[
     AntWorldComponent,
     AppComponent,
     BackPropagationComponent,
+    C45Component,
     GeneticAlgorithmComponent,
     GeneticProgrammingComponent
-  ],
-  providers = @@[BackPropagationService, GeneticAlgorithmService, GeneticProgrammingService],
+    ],
+  providers = @@[BackPropagationService, C45Service, GeneticAlgorithmService, GeneticProgrammingService],
   bootstrap = @@[AppComponent]
 )
 class AppModule {
